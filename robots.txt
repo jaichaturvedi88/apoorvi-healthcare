@@ -1,0 +1,12 @@
+# robots.txt — Apoorvi Healthcare
+# Allow all crawlers; block only internal utility paths
+
+User-agent: *
+Allow: /
+
+# Disallow any admin or backend paths (precautionary)
+Disallow: /admin/
+Disallow: /.netlify/
+
+# Sitemap location
+Sitemap: https://[DOMAIN]/sitemap.xml

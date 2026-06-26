@@ -1,0 +1,75 @@
+# netlify.toml — Apoorvi Healthcare
+# Deployment configuration for Netlify
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+# ============================================================
+# BUILD SETTINGS
+# This is a plain HTML/CSS/JS static site — no build step.
+# The entire repository root IS the publish directory.
+# ============================================================
+[build]
+  publish = "."       # Root of the repo is what gets deployed
+  # No build command needed for pure static sites.
+  # If you ever add Astro/Vite, set:
+  #   command = "npm run build"
+  #   publish = "dist"
+
+# ============================================================
+# REDIRECTS & HEADERS
+# ============================================================
+
+# HTTP → HTTPS is handled automatically by Netlify — no rule needed.
+#
+# Once you have a real domain, you can add an explicit redirect here:
+#
+# [[redirects]]
+#   from   = "http://apoorvihealthcare.in/*"
+#   to     = "https://apoorvihealthcare.in/:splat"
+#   status = 301
+#   force  = true
+#
+# IMPORTANT: Never use a placeholder like [DOMAIN] in this block —
+# Netlify validates redirect URLs at deploy time and will reject it.
+
+# Netlify Forms submissions are handled via JS fetch (AJAX) in main.js,
+# so no server-side success redirect rule is needed.
+
+# ============================================================
+# SECURITY & PERFORMANCE HEADERS
+# ============================================================
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options            = "DENY"
+    X-Content-Type-Options     = "nosniff"
+    X-XSS-Protection           = "1; mode=block"
+    Referrer-Policy            = "strict-origin-when-cross-origin"
+    Permissions-Policy         = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security  = "max-age=63072000; includeSubDomains; preload"
+
+# Long cache for static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML: short cache so content updates propagate quickly
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
