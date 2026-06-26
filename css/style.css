@@ -2022,3 +2022,158 @@ a.footer-contact-item:hover { color: #fff; }
     transition: none;
   }
 }
+
+/* ----------------------------------------------------------------
+   FLOATING WHATSAPP BUTTON
+   ---------------------------------------------------------------- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: #25D366;
+  color: #fff;
+  border-radius: var(--radius-full);
+  padding: 14px 20px 14px 16px;
+  text-decoration: none;
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.45), 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, padding 0.25s ease;
+  overflow: hidden;
+}
+
+.whatsapp-float svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.whatsapp-label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  max-width: 160px;
+  overflow: hidden;
+  transition: max-width 0.3s ease, opacity 0.3s ease;
+}
+
+/* Pulse ring on load */
+.whatsapp-float::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: #25D366;
+  animation: wa-pulse 2.5s ease-out 1s infinite;
+  z-index: -1;
+}
+
+@keyframes wa-pulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 40px rgba(37, 211, 102, 0.55), 0 4px 12px rgba(0,0,0,0.18);
+}
+
+.whatsapp-float:focus-visible {
+  outline: 3px solid #25D366;
+  outline-offset: 3px;
+}
+
+/* On mobile: icon-only pill, expand on hover/focus */
+@media (max-width: 480px) {
+  .whatsapp-float {
+    padding: 14px;
+    bottom: 20px;
+    right: 16px;
+  }
+  .whatsapp-label {
+    max-width: 0;
+    opacity: 0;
+    padding: 0;
+  }
+  .whatsapp-float:hover .whatsapp-label,
+  .whatsapp-float:focus .whatsapp-label {
+    max-width: 160px;
+    opacity: 1;
+    padding-left: var(--space-2);
+  }
+}
+
+/* ----------------------------------------------------------------
+   DATETIME-LOCAL INPUT STYLING
+   ---------------------------------------------------------------- */
+.form-datetime {
+  cursor: pointer;
+  color-scheme: light;
+}
+
+.form-datetime::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  filter: invert(20%) sepia(80%) saturate(600%) hue-rotate(260deg);
+  transition: opacity 0.2s ease;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.form-datetime::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ----------------------------------------------------------------
+   GOOGLE MAPS SECTION
+   ---------------------------------------------------------------- */
+.map-section {
+  margin-top: var(--space-16);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-primary-pale);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--color-accent-light);
+}
+
+.map-header svg {
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.map-embed-wrap {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.map-embed-wrap iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+@media (max-width: 640px) {
+  .map-embed-wrap iframe {
+    height: 240px;
+  }
+  .whatsapp-float {
+    bottom: 20px;
+    right: 16px;
+  }
+}
+
