@@ -1,0 +1,10 @@
+# .netlifyignore — Files/folders to exclude from Netlify deployment
+# Works exactly like .gitignore but for Netlify's deploy step.
+# These files stay in the Git repo but are NOT published to the CDN.
+
+# Reference documents / internal assets (not for public serving)
+01-docs/
+
+# Common dev/editor files (add more if needed)
+*.md
+.git/
